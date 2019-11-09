@@ -55,7 +55,37 @@ void dump_mem(const void *mem , size_t len) {
  */
 int create_emps(void *emps, char *text) {
     /* Your implementation should appear here */
+    while(*text != '\0'){
+        char temp1[MAX_LONG_WIDTH + 1];
+        int l1;
+        for(l1 = 0; *(text + l1) != ','; l1++){
+            *(temp1 + l1) = *(text + l1);
+        }
     
+        long id = atol(temp1);
+        *(long *)emps = id;
+        emps = emps + sizeof(long);
+        text = text + l1 + 1;
+        for(int t = 0; t < 4; t++){
+            int i;
+            for(i = 0; *(text + i) != ','; i++){
+                *(char *)(emps + i) = *(text + i);
+            }
+            emps = emps + MAX_STRING_SIZE;
+            text = text + i + 1;
+        }
+    
+        char temp2[MAX_LONG_WIDTH + 1];
+        int l2;
+        for(l2 = 0; *(text + l2) != '\n'; l2++){
+            *(temp2 + l2) = *(text + l2);
+        }
+        long sal = atol(temp2);
+        *(long *)emps = sal;
+        emps = emps + sizeof(long);
+        text = text + l2 + 1;
+//        *(char *)emps++ = '\n';
+    }
     return 0;
 }
 
